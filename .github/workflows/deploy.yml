@@ -31,8 +31,18 @@ jobs:
     - name: Prepare SSH Bastion tunnel to Yjs
       run: |
         mkdir -p ~/.ssh
-        echo "${{ secrets.BASTION_PRIVATE_KEY }}" | base64 -d > ~/.ssh/bastion.pem
+        # Write the raw private key directly
+        echo "${{ secrets.BASTION_PRIVATE_KEY }}" > ~/.ssh/bastion.pem
         chmod 600 ~/.ssh/bastion.pem
+
+        # Test bastion key file
+        echo "Testing bastion key file:"
+        ls -l ~/.ssh/bastion.pem
+        ssh-keygen -l -f ~/.ssh/bastion.pem || echo "Invalid key format"
+
+        # Test bastion host connectivity
+        echo "Testing bastion host connectivity:"
+        nc -zv ${{ secrets.BASTION_HOST }} 22 || echo "Bastion host not reachable"
 
         echo "Host yjs" >> ~/.ssh/config
         echo "  HostName ${{ secrets.YJS_PRIVATE_IP }}" >> ~/.ssh/config
@@ -43,7 +53,11 @@ jobs:
         echo "  ServerAliveInterval 60" >> ~/.ssh/config
         echo "  ServerAliveCountMax 3" >> ~/.ssh/config
 
-    - name: Test SSH connection
+    - name: Test Bastion SSH connection
+      run: |
+        ssh -v -i ~/.ssh/bastion.pem ${{ secrets.BASTION_USER }}@${{ secrets.BASTION_HOST }} 'echo "Bastion connection successful"'
+
+    - name: Test Yjs SSH connection
       run: |
         ssh -v yjs 'echo "SSH connection successful"'
 
