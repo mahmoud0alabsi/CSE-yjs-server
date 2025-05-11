@@ -10,7 +10,6 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Respond with 404 for other requests
   res.writeHead(404);
   res.end();
 });
