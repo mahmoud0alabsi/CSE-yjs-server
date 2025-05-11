@@ -40,10 +40,16 @@ jobs:
         echo "  IdentityFile ~/.ssh/bastion.pem" >> ~/.ssh/config
         echo "  ProxyCommand ssh -i ~/.ssh/bastion.pem -o StrictHostKeyChecking=no -W %h:%p ${{ secrets.BASTION_USER }}@${{ secrets.BASTION_HOST }}" >> ~/.ssh/config
         echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+        echo "  ServerAliveInterval 60" >> ~/.ssh/config
+        echo "  ServerAliveCountMax 3" >> ~/.ssh/config
+
+    - name: Test SSH connection
+      run: |
+        ssh -v yjs 'echo "SSH connection successful"'
 
     - name: Deploy to Yjs via Bastion
       run: |
-        ssh yjs <<EOSSH
+        ssh -v yjs <<EOSSH
           docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
           docker stop yjs || true && docker rm yjs || true
           docker run -d --name yjs -p 1234:1234 ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
