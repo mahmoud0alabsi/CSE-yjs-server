@@ -1,6 +1,20 @@
-# CodeSpace Editor Yjs Server
+# CodeSpace Editor - Yjs Server
 
-The CodeSpace Editor Yjs Server enables real-time collaborative editing for the [CodeSpace Editor](https://github.com/mahmoud0alabsi/code_space_editor_react) platform. It uses Yjs, a Conflict-free Replicated Data Type (CRDT) library, to synchronize document changes across multiple users in real time, integrated with the React.js frontend and Spring Boot backend.
+###
+
+<div align="center">
+<img width="300px" src="https://github.com/mahmoud0alabsi/mahmoud0alabsi/blob/main/assets/logo/codespace.png?raw=true"/>
+</div>
+
+###
+
+The CodeSpace Editor Yjs Server enables real-time collaborative editing for the [CodeSpace Editor](https://github.com/mahmoud0alabsi/CSE-React) platform. It uses Yjs, a Conflict-free Replicated Data Type (CRDT) library, to synchronize document changes across multiple users in real time, integrated with the React.js frontend and Spring Boot backend.
+
+###
+
+🎥 [Watch the CodeSpace Editor Tour](https://youtu.be/xTDq5a8hy6A)
+
+###
 
 ## Functionality
 
@@ -32,15 +46,15 @@ In CodeSpace Editor, Yjs powers the `/collaborative-editor` route, complementing
 
 - Node.js 18+
 - npm 9+
-- [CodeSpace Editor Frontend](https://github.com/mahmoud0alabsi/code_space_editor_react) and [Backend](https://github.com/mahmoud0alabsi/code_space_editor) running
+- [CodeSpace Editor Frontend](https://github.com/mahmoud0alabsi/CSE-React) and [Backend](https://github.com/mahmoud0alabsi/CSE-SpringBoot) running
 
 ## Setup Instructions
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/mahmoud0alabsi/code_space_editor_yjs_server.git
-cd code_space_editor_yjs_server
+git clone https://github.com/mahmoud0alabsi/CSE-yjs-server.git
+cd CSE-yjs-server
 ```
 
 ### 2. Install Dependencies
